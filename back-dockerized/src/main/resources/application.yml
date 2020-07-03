@@ -1,5 +1,3 @@
-server:
-  port: 9090
 app:
   ui-client-id: book-library-id
   ui-client-secret: secret
@@ -9,14 +7,7 @@ app:
 #  keystore-path: absolute path to keystore
 
 spring:
-  datasource:
-    initialization-mode: always
-    driverClassName: org.h2.Driver
-    url: jdbc:h2:mem:book-library
-    # tcp connection jdbc:h2:tcp://localhost:7072/mem:book-library
-    # web connection http://localhost:8082
-    username: sa
-    password:
+  profiles.active: development
   jpa:
     show-sql: true
     database: default
@@ -33,3 +24,33 @@ logging:
   level:
     root: info
     org.springframework: info
+
+---
+# docker port binding 8091
+server.port: 5000
+spring:
+  profiles: production
+  datasource:
+    initialization-mode: always
+    driverClassName: org.h2.Driver
+    url: jdbc:h2:mem:book-library
+    # docker port bindings
+    # tcp connection jdbc:h2:tcp://localhost:7073/mem:book-library
+    # web connection http://localhost:8083  jdbc:h2:mem:book-library
+    username: sa
+    password:
+
+---
+server.port: 8090
+spring:
+  profiles: development
+  datasource:
+    initialization-mode: always
+    driverClassName: org.h2.Driver
+    url: jdbc:h2:mem:book-library
+    # tcp connection jdbc:h2:tcp://localhost:7072/mem:book-library
+    # web connection http://localhost:8082  jdbc:h2:mem:book-library
+    username: sa
+    password:
+
+---
