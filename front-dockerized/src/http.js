@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const http = axios.create({
-    baseURL: "http://localhost:9090",
+    baseURL: process.env.VUE_APP_BACKEND_BASE_URL,
 });
 
 http.interceptors.request.use(
