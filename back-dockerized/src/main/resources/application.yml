@@ -52,5 +52,9 @@ spring:
     # web connection http://localhost:8082  jdbc:h2:mem:book-library
     username: sa
     password:
+logging:
+  level:
+    root: info
+    org.springframework: debug
 
 ---
