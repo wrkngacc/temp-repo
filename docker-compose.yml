@@ -1,0 +1,18 @@
+version: '3.7'
+services:
+  bl-back:
+    build: .
+    ports:
+      - "9091:5000"
+    environment:
+      - PROFILES_OPTION=-Dspring-boot.run.profiles=production
+  bl-front:
+    depends_on:
+      - bl-back
+    build:
+      context: ./front-dockerized/
+      dockerfile: ./Dockerfile
+    ports:
+      - "8081:80"
+    environment:
+      - PROFILES_OPTION=-Dspring-boot.run.profiles=production
